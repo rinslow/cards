@@ -56,6 +56,13 @@ class Card:
         self.suit = suit
         self.rank = rank
 
+    @classmethod
+    def random(cls) -> "Card":
+        return Card(
+          random.choice(list(Suit)),
+          random.choice(list(Rank))
+        )
+
     def __str__(self):
         return f"{RANK_ASCII[self.rank]}{SUIT_ASCII[self.suit]}"
 
@@ -70,11 +77,16 @@ class Game:
 class Player:
     pass
 
+
 class Hand:
     """A hand is a collection of cards."""
 
     def __init__(self, cards: list[Card] = []):
         self.cards = cards
+
+    @classmethod
+    def random(cls, size: int = 5) -> "Hand":
+        return Hand([Card.random() for _ in range(size)])
 
     def add_card(self, card: Card) -> None:
         self.cards.append(card)
@@ -117,31 +129,5 @@ class Deck:
 
 
 if __name__ == "__main__":
-    # deck = Deck()
-    # player1_5_cards = deck.draw_cards(5)
-    # player2_5_cards = deck.draw_cards(5)
-    # print(", ".join([str(x) for x in player1_5_cards]))
-    # print(", ".join([str(x) for x in player2_5_cards]))
-    # print("-" * 40)
-    # print(deck)
-
-    hand = Hand()
-    hand.add_card(Card(Suit.HEARTS, Rank.ACE))
-    hand.add_card(Card(Suit.HEARTS, Rank.KING))
-    hand.add_card(Card(Suit.HEARTS, Rank.QUEEN))
-    hand.add_card(Card(Suit.HEARTS, Rank.JACK))
-    hand.add_card(Card(Suit.HEARTS, Rank.TEN))
-
-    hand = Hand(
-        [
-            Card(Suit.HEARTS, Rank.ACE),
-            Card(Suit.HEARTS, Rank.KING),
-            Card(Suit.HEARTS, Rank.QUEEN),
-            Card(Suit.HEARTS, Rank.JACK),
-            Card(Suit.HEARTS, Rank.TEN),
-        ]
-    )
+    hand = Hand.random()
     print(hand)
-
-    for card in hand:
-        print(card)
