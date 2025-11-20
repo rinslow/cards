@@ -19,19 +19,19 @@ SUIT_ASCII = {
 
 
 class Rank(Enum):
-    ACE = "ace"
-    KING = "king"
-    QUEEN = "queen"
-    JACK = "jack"
-    TEN = "ten"
-    NINE = "nine"
-    EIGHT = "eight"
-    SEVEN = "seven"
-    SIX = "six"
-    FIVE = "five"
-    FOUR = "four"
-    THREE = "three"
-    TWO = "two"
+    ACE = 14
+    KING = 13
+    QUEEN = 12
+    JACK = 11
+    TEN = 10
+    NINE = 9
+    EIGHT = 8
+    SEVEN = 7
+    SIX = 6
+    FIVE = 5
+    FOUR = 4
+    THREE = 3
+    TWO = 2
 
 
 RANK_ASCII = {
@@ -77,7 +77,6 @@ class Game:
 class Player:
     pass
 
-
 class Hand:
     """A hand is a collection of cards."""
 
@@ -103,6 +102,27 @@ class Hand:
         return ", ".join([str(card) for card in self.cards])
 
 
+
+class Board:
+    """A board is a collection of hands, each player has a board of typically 5 hands."""
+    def __init__(self, hands: list[Hand]):
+        self.hands = hands
+
+    @classmethod
+    def empty(cls) -> "Board":
+        return Board([Hand() for _ in range(5)])
+
+    @classmethod
+    def random(cls, num_hands: int = 5) -> "Board":
+        return Board([Hand.random() for _ in range(num_hands)])
+
+
+    def __str__(self):
+        return "\n".join([str(hand) for hand in self.hands])
+
+    def add_card(self, card: Card, hand_index: int) -> None:
+        self.hands[hand_index].add
+
 class Deck:
     def __init__(self, shuffled: bool = True):
         self.cards = [Card(suit, rank) for suit in Suit for rank in Rank]
@@ -127,7 +147,7 @@ class Deck:
             lines.append(line)
         return ",\n".join(lines)
 
-
 if __name__ == "__main__":
-    hand = Hand.random()
-    print(hand)
+    #hand = Hand.random()
+    board = Board.random(5)
+
