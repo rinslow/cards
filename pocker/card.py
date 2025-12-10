@@ -65,6 +65,9 @@ class Card:
 
     def __str__(self):
         return f"{RANK_ASCII[self.rank]}{SUIT_ASCII[self.suit]}"
+    
+    def __len__(self):
+        return 1
 
     def __repr__(self):
         return f"Card(suit={self.suit.value}, rank={self.rank.value})"

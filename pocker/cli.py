@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Simple CLI Game Template
 A minimalistic template for building command-line games in Python.
